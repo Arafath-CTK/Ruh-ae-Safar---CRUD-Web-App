@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruh Ae Safar || User Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Alegreya:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        background-color: rgb(253, 251, 243);
+      }
+      #userListContainer {
+        /* display: none; */
+        /* margin-left: 30px; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+        border-radius: 10px;
+        padding: 20px;
+        font-family: "Abhaya Libre", serif;
+        color: maroon;
+      }
+      #userList {
+        border-collapse: collapse;
+        margin: 25px 0;
+        width: 75%;
+        font-size: 18px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      }
+      #userList th {
+        background-color: rgb(102, 0, 0);
+        color: white;
+        text-align: left;
+        font-weight: bold;
+      }
+      #userList th,
+      #userList td {
+        padding: 12px 15px;
+      }
+      #userList tr {
+        border-bottom: 1px solid #dddddd;
+      }
+      #userList tr:nth-child(1) {
+        border-bottom: 0;
+      }
+      #userList tr:nth-of-type(even) {
+        background-color: rgb(105, 0, 0);
+      }
+      #userList tr:last-of-type {
+        border-bottom: 2px solid rgb(102, 0, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      style="
+        background-color: rgb(241, 234, 210);
+        height: 60px;
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1.5px solid maroon;
+      "
+    >
+      <h1
+        style="
+          background-color: rgb(241, 234, 210);
+          font-family: 'Alegreya', serif;
+          color: maroon;
+          font-size: 36px;
+          letter-spacing: 1px;
+        "
+      >
+        Ruh' ae___Safar.
+      </h1>
+      <!-- <input
+        id="bHistory"
+        type="button"
+        value="Booking  History"
+        style="
+          color: maroon;
+          width: 9rem;
+          border-radius: 50px;
+          margin-right: 40px;
+          border: 0;
+        "
+        onclick="(() =>  window.location.href = '/tableView')()"
+      /> -->
+    </nav>
+
+    <div id="userListContainer">
+      <h3 style="font-size: 24px">User Bookings</h3>
+      <table id="userList">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Email Id</th>
+            <th>Date</th>
+            <th>Destination</th>
+            <th>Day Plan</th>
+          </tr>
+        </thead>
+        <tbody id="userData">
+          <tr>
+            <td>1</td>
+            <td>arafath</td>
+            <td>1234567890</td>
+            <td>addv@dfw.com</td>
+            <td>12-32-2222</td>
+            <td>adcdsvwd</td>
+            <td>dvwve</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>arafath</td>
+            <td>1234567890</td>
+            <td>addv@dfw.com</td>
+            <td>12-32-2222</td>
+            <td>adcdsvwd</td>
+            <td>dvwve</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>arafath</td>
+            <td>1234567890</td>
+            <td>addv@dfw.com</td>
+            <td>12-32-2222</td>
+            <td>adcdsvwd</td>
+            <td>dvwve</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

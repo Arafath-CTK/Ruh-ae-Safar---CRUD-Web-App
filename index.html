@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruh Ae Safar || Your Travel Partner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Alegreya:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        background-color: rgb(253, 251, 243);
+      }
+      input,
+      select,
+      option {
+        font-family: "Abhaya Libre", serif;
+        padding: 10px;
+        width: 18rem;
+        border-radius: 8px;
+        font-size: 18px;
+        border: 1.5px solid maroon;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: rgb(0, 135, 0);
+      }
+      #submit:focus {
+        border-color: maroon;
+      }
+      select {
+        width: 19.5rem;
+      }
+      label {
+        font-size: 18px;
+        margin-top: 30px;
+        margin-bottom: 2px;
+        color: maroon;
+      }
+      #submit:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      style="
+        background-color: rgb(241, 234, 210);
+        height: 60px;
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1.5px solid maroon;
+      "
+    >
+      <h1
+        style="
+          background-color: rgb(241, 234, 210);
+          font-family: 'Alegreya', serif;
+          color: maroon;
+          font-size: 36px;
+          letter-spacing: 1px;
+        "
+      >
+        Ruh' ae___Safar.
+      </h1>
+      <!-- <input
+        id="bHistory"
+        type="button"
+        value="Booking  History"
+        style="
+          color: maroon;
+          width: 9rem;
+          border-radius: 50px;
+          margin-right: 40px;
+          border: 0;
+        "
+        onclick="(() =>  window.location.href = '/tableView')()"
+      /> -->
+    </nav>
+
+    <div
+      class="registration"
+      style="font-family: 'Abhaya Libre', serif; margin-top: 40px"
+    >
+      <div
+        class="heading"
+        style="display: flex; justify-content: center; align-items: center"
+      >
+        <h3
+          style="
+            font-size: 2rem;
+            color: maroon;
+            font-style: italic;
+            letter-spacing: 2px;
+          "
+        >
+          <u>Plan Your Trip</u>
+        </h3>
+      </div>
+      <div
+        class="fields"
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 40px;
+        "
+      >
+        <div class="left">
+          <div class="f1" style="display: flex; flex-direction: column">
+            <label for="name">Name</label>
+            <input
+              id="name"
+              type="text"
+              name="Name"
+              placeholder="Enter your name..."
+            />
+            <small style="color: red" id="nameError"></small>
+          </div>
+          <div class="f1" style="display: flex; flex-direction: column">
+            <label for="number">Phone Number</label>
+            <input
+              id="number"
+              type="number"
+              name="Number"
+              placeholder="Enter your phone number..."
+            />
+            <small style="color: red" id="numberError"></small>
+          </div>
+          <div class="f1" style="display: flex; flex-direction: column">
+            <label for="nodays">Number Of Days</label>
+            <select name="Day Plan" id="dayPlan">
+              <option value="" style="display: none" selected>
+                Select Days
+              </option>
+              <option value="3D4N">3 Days & 4 Nights</option>
+              <option value="4D5N">4 Days & 5 Nights</option>
+              <option value="5D6N">5 Days & 6 Nights</option>
+              <option value="6D7N">6 Days & 7 Nights</option>
+              <option value="7D8N">7 Days & 8 Nights</option>
+            </select>
+          </div>
+          <small style="color: red" id="dayPlanError"></small>
+        </div>
+
+        <div class="right">
+          <div class="f1" style="display: flex; flex-direction: column">
+            <label for="Email">Email</label>
+            <input
+              id="email"
+              type="text"
+              name="Email"
+              placeholder="Enter your Email..."
+            />
+            <small style="color: red" id="emailError"></small>
+          </div>
+          <div class="f1" style="display: flex; flex-direction: column">
+            <label for="destination">Destination</label>
+            <select name="Destination" id="destination">
+              <option value="" style="display: none" selected>
+                Select Destination
+              </option>
+              <option value="Kashmir">Kashmir</option>
+              <option value="Manali">Manali</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Meghalaya">Meghalaya</option>
+              <option value="Goa">Goa</option>
+            </select>
+            <small style="color: red" id="destinationError"></small>
+          </div>
+          <div class="f1" style="display: flex; flex-direction: column">
+            <label for="date">Date</label>
+            <input id="date" type="date" name="Date" />
+            <small style="color: red" id="dateError"></small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="book"
+      style="
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+      "
+    >
+      <input
+        id="submit"
+        type="button"
+        value="Book The Trip"
+        style="background-color: maroon; color: white; width: 15rem"
+      />
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const submitButton = document.querySelector("#submit");
+
+        submitButton.addEventListener("click", () => {
+          let name = document.getElementById("name").value.toUpperCase();
+          let number = document.getElementById("number").value;
+          let email = document.getElementById("email").value;
+          let dayPlan = document.getElementById("dayPlan").value;
+          let destination = document.getElementById("destination").value;
+          let date = document.getElementById("date").value;
+          let id = 0;
+
+          let nameValid = /^[A-Za-z]{3,}$/.test(name);
+          let numberValid = /^\d{10,}$/.test(number);
+          let emailValid = /^[\w-.]+@[\w-]+\.+[\w-]{2,}$/.test(email);
+          let dayPlanValid = dayPlan !== "" || dayPlan === "Select Days";
+          let destinationValid =
+            destination !== "" || destination === "Select Destination";
+          let dateValid = /^\d{4}-\d{2}-\d{2}$/.test(date);
+
+          if (!nameValid) {
+            document.getElementById("nameError").innerHTML =
+              "Min 3 character needed";
+          } else {
+            document.getElementById("nameError").innerHTML = "";
+          }
+          if (!numberValid) {
+            document.getElementById("numberError").innerHTML =
+              "Enter a valid phone number";
+          } else {
+            document.getElementById("numberError").innerHTML = "";
+          }
+          if (!emailValid) {
+            document.getElementById("emailError").innerHTML =
+              "Enter a valid mail id";
+          } else {
+            document.getElementById("emailError").innerHTML = "";
+          }
+          if (!dayPlanValid) {
+            document.getElementById("dayPlanError").innerHTML =
+              "Select a day plan";
+          } else {
+            document.getElementById("dayPlanError").innerHTML = "";
+          }
+          if (!destinationValid) {
+            document.getElementById("destinationError").innerHTML =
+              "Select a destination";
+          } else {
+            document.getElementById("destinationError").innerHTML = "";
+          }
+          if (!dateValid) {
+            document.getElementById("dateError").innerHTML =
+              "Selecta a valid date";
+          } else {
+            document.getElementById("dateError").innerHTML = "";
+          }
+
+          if (
+            nameValid &&
+            numberValid &&
+            emailValid &&
+            dayPlanValid &&
+            destinationValid &&
+            dateValid
+          ) {
+            //Store this value into an object
+            const userData = {
+              id,
+              name,
+              number,
+              email,
+              destination,
+              dayPlan,
+              date,
+            };
+
+            //fetch is a web API, its used to easy and flexible request to server. In fetch function, there wil be two parametres and it return a promise.
+            fetch("/submit", {
+              //First parameter is the route of the server in which are we making the request.
+              method: "POST", //Second parametre is an object of options, in which we can specify the method of the request, headers and the valuea or data that is passing if its a POST method.
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(userData), //The value passing will be assigned to a property called 'body' (Common practice)
+            }).then((response) => {
+              //fetch returned a promise so we can chain next task as '.then'. here we are doing a basic error handling.
+              if (response.status === 200) {
+                console.log("data submitted successfully.");
+              } else {
+                console.error(
+                  "An unexpected error occured",
+                  response.status,
+                  response.statusText
+                );
+              }
+            });
+            window.location.href = "/userList"; //And at last we display the user entered data along with the previous datas as a table.
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
