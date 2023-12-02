@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ruh Ae Safar || User Details</title>
+    <title>Ruh Ae Safar | User Details</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,15 +14,12 @@
       * {
         margin: 0;
         padding: 0;
-        background-color: rgb(253, 251, 243);
       }
       #userListContainer {
-        /* display: none; */
-        /* margin-left: 30px; */
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         margin-top: 30px;
         border-radius: 10px;
         padding: 20px;
@@ -32,9 +29,10 @@
       #userList {
         border-collapse: collapse;
         margin: 25px 0;
-        width: 75%;
+        width: 96%;
         font-size: 18px;
         border-radius: 5px 5px 0 0;
+        background-color: rgb(255, 245, 245);
         overflow: hidden;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
       }
@@ -49,20 +47,53 @@
         padding: 12px 15px;
       }
       #userList tr {
-        border-bottom: 1px solid #dddddd;
+        border-bottom: 1px solid #484848;
       }
       #userList tr:nth-child(1) {
         border-bottom: 0;
       }
       #userList tr:nth-of-type(even) {
-        background-color: rgb(105, 0, 0);
+        background-color: rgb(255, 230, 230);
       }
       #userList tr:last-of-type {
-        border-bottom: 2px solid rgb(102, 0, 0);
+        border-bottom: 2px solid maroon;
+      }
+      input,
+      select,
+      option {
+        font-family: "Abhaya Libre", serif;
+        padding: 10px;
+        width: 18rem;
+        border-radius: 8px;
+        font-size: 18px;
+        border: 1.5px solid maroon;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: rgb(0, 135, 0);
+      }
+      #submit:focus {
+        border-color: maroon;
+      }
+      select {
+        width: 19.5rem;
+      }
+      label {
+        font-size: 18px;
+        margin-top: 30px;
+        margin-bottom: 2px;
+        color: maroon;
+      }
+      #submit:hover {
+        cursor: pointer;
+      }
+      button:hover {
+        cursor: pointer;
       }
     </style>
   </head>
-  <body>
+  <body style="background-color: rgb(253, 251, 243)">
     <nav
       style="
         background-color: rgb(241, 234, 210);
@@ -85,65 +116,345 @@
       >
         Ruh' ae___Safar.
       </h1>
-      <!-- <input
+      <input
         id="bHistory"
         type="button"
-        value="Booking  History"
+        value="Home"
         style="
           color: maroon;
-          width: 9rem;
+          width: fit-content;
           border-radius: 50px;
           margin-right: 40px;
           border: 0;
         "
-        onclick="(() =>  window.location.href = '/tableView')()"
-      /> -->
+        onclick="(() =>  window.location.href = '/home')()"
+      />
     </nav>
 
-    <div id="userListContainer">
-      <h3 style="font-size: 24px">User Bookings</h3>
-      <table id="userList">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Phone Number</th>
-            <th>Email Id</th>
-            <th>Date</th>
-            <th>Destination</th>
-            <th>Day Plan</th>
-          </tr>
-        </thead>
-        <tbody id="userData">
-          <tr>
-            <td>1</td>
-            <td>arafath</td>
-            <td>1234567890</td>
-            <td>addv@dfw.com</td>
-            <td>12-32-2222</td>
-            <td>adcdsvwd</td>
-            <td>dvwve</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>arafath</td>
-            <td>1234567890</td>
-            <td>addv@dfw.com</td>
-            <td>12-32-2222</td>
-            <td>adcdsvwd</td>
-            <td>dvwve</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>arafath</td>
-            <td>1234567890</td>
-            <td>addv@dfw.com</td>
-            <td>12-32-2222</td>
-            <td>adcdsvwd</td>
-            <td>dvwve</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="allcontainer" style="position: relative">
+      <div id="userListContainer">
+        <h3
+          style="
+            font-size: 24px;
+            font-size: 2rem;
+            font-style: italic;
+            letter-spacing: 2px;
+          "
+        >
+          <u>User Bookings</u>
+        </h3>
+        <table id="userList">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>Email Id</th>
+              <th>Destination</th>
+              <th>Day Plan</th>
+              <th>Date</th>
+              <th style="text-align: center">Action</th>
+            </tr>
+          </thead>
+          <tbody id="userData"></tbody>
+        </table>
+      </div>
+
+      <div
+        id="registration"
+        style="
+          display: none;
+          position: absolute;
+          top: 40px;
+          left: 25%;
+          font-family: 'Abhaya Libre', serif;
+          margin-top: 20px;
+        "
+      >
+        <div
+          class="heading"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <h3
+            style="
+              font-size: 2rem;
+              color: maroon;
+              font-style: italic;
+              letter-spacing: 2px;
+            "
+          >
+            <u>Modify Booking</u>
+          </h3>
+        </div>
+        <div
+          class="fields"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+          "
+        >
+          <div class="left">
+            <div class="f1" style="display: flex; flex-direction: column">
+              <label for="name">Name</label>
+              <input
+                id="name"
+                type="text"
+                name="Name"
+                placeholder="Enter your name..."
+              />
+              <small style="color: red" id="nameError"></small>
+            </div>
+            <div class="f1" style="display: flex; flex-direction: column">
+              <label for="number">Phone Number</label>
+              <input
+                id="number"
+                type="number"
+                name="Number"
+                placeholder="Enter your phone number..."
+              />
+              <small style="color: red" id="numberError"></small>
+            </div>
+            <div class="f1" style="display: flex; flex-direction: column">
+              <label for="nodays">Number Of Days</label>
+              <select name="Day Plan" id="dayPlan">
+                <option value="" style="display: none" selected>
+                  Select Days
+                </option>
+                <option value="3D4N">3 Days & 4 Nights</option>
+                <option value="4D5N">4 Days & 5 Nights</option>
+                <option value="5D6N">5 Days & 6 Nights</option>
+                <option value="6D7N">6 Days & 7 Nights</option>
+                <option value="7D8N">7 Days & 8 Nights</option>
+              </select>
+            </div>
+            <small style="color: red" id="dayPlanError"></small>
+          </div>
+
+          <div class="right">
+            <div class="f1" style="display: flex; flex-direction: column">
+              <label for="Email">Email</label>
+              <input
+                id="email"
+                type="text"
+                name="Email"
+                placeholder="Enter your Email..."
+              />
+              <small style="color: red" id="emailError"></small>
+            </div>
+            <div class="f1" style="display: flex; flex-direction: column">
+              <label for="destination">Destination</label>
+              <select name="Destination" id="destination">
+                <option value="" style="display: none" selected>
+                  Select Destination
+                </option>
+                <option value="Kashmir">Kashmir</option>
+                <option value="Manali">Manali</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Goa">Goa</option>
+              </select>
+              <small style="color: red" id="destinationError"></small>
+            </div>
+            <div class="f1" style="display: flex; flex-direction: column">
+              <label for="date">Date</label>
+              <input id="date" type="date" name="Date" />
+              <small style="color: red" id="dateError"></small>
+            </div>
+          </div>
+        </div>
+        <div
+          class="book"
+          style="
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+          "
+        >
+          <input
+            id="submitChange"
+            type="button"
+            value="Modify"
+            style="background-color: maroon; color: white; width: 15rem"
+          />
+        </div>
+      </div>
     </div>
+
+    <script>
+      //Adding data from json to the table
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("/getdata")
+          .then((response) => response.json()) //.json() is an easy method that will convert a json object into a js object. behind the method ".json()" it uses the normal "JSON.parse()" method. the ".json()" method will be more convenient to use when working with fetch and promises.
+          .then((data) => {
+            //Now we have all the objects (data) from the json database as js objects. now we have to add that object properties into relevent columns in the table of table.html.
+            const userData = document.getElementById("userData"); //loading the tbody into js. bcz, we have to add rows into this tbody section.
+
+            data.forEach((element) => {
+              //This element means, an single object in the json database which contains many objects like this. this for each iterates over every objects included in the json database.
+              const row = document.createElement("tr"); //variable for ceating a new row.
+
+              row.innerHTML = `
+              <td>${element.id}</td>
+              <td>${element.name}</td>
+              <td>${element.number}</td>
+              <td>${element.email}</td>
+              <td>${element.destination}</td>
+              <td>${element.dayPlan}</td>
+              <td>${element.date}</td>
+              <td style=" align-items: center; justify-content: space-around;">
+                  <button
+                      type="button"
+                      style="
+                        padding:4px;
+                        background-color:rgb(234, 195, 195);
+                        color:maroon;
+                        width:85px;
+                        height: 30px;
+                        border-radius:5px;
+                        border:0"
+                      onclick="modifyUser(${element.id},${element.name},${element.number},${element.email},${element.destination},${element.dayPlan},${element.date})"
+                  >Modify</button>
+                  <button
+                      style="
+                        padding:4px;
+                        margin-top:4px;
+                        background-color:
+                        rgb(168, 0, 0);
+                        color: white;
+                        width:85px;
+                        height: 30px;
+                        border-radius: 5px;
+                        border:0"
+                  >Delete</button>
+              </td>
+              `;
+
+              userData.appendChild(row);
+            });
+          })
+          .catch((err) => {
+            console.error("Error loading the content", err);
+          });
+      });
+
+      //Modification part
+      function modifyUser(
+        mId,
+        mName,
+        mNumber,
+        mEmail,
+        mDestination,
+        mDayPlan,
+        mDate
+      ) {
+        document.getElementById("userListContainer").style.display = "none";
+        document.getElementById("registration").style.display = "block";
+
+        document.getElementById("name").value = mName;
+        document.getElementById("number").value = mNumber;
+        document.getElementById("email").value = mEmail;
+        document.getElementById("destination").value = mDestination;
+        document.getElementById("dayPlan").value = mDayPlan;
+        document.getElementById("date").value = mDate;
+
+        document
+          .getElementById("submitChange")
+          .addEventListener("click", () => {
+            let name = document.getElementById("name").value.toUpperCase();
+            let number = document.getElementById("number").value;
+            let email = document.getElementById("email").value;
+            let dayPlan = document.getElementById("dayPlan").value;
+            let destination = document.getElementById("destination").value;
+            let date = document.getElementById("date").value;
+
+            let nameValid = /^[A-Za-z\s]{3,}$/.test(name);
+            let numberValid = /^\d{10,}$/.test(number);
+            let emailValid = /^[\w-.]+@[\w-]+\.+[\w-]{2,}$/.test(email);
+            let dayPlanValid = dayPlan !== "" || dayPlan === "Select Days";
+            let destinationValid =
+              destination !== "" || destination === "Select Destination";
+            let dateValid = /^\d{4}-\d{2}-\d{2}$/.test(date);
+
+            if (!nameValid) {
+              document.getElementById("nameError").innerHTML =
+                "Min 3 character needed";
+            } else {
+              document.getElementById("nameError").innerHTML = "";
+            }
+            if (!numberValid) {
+              document.getElementById("numberError").innerHTML =
+                "Enter a valid phone number";
+            } else {
+              document.getElementById("numberError").innerHTML = "";
+            }
+            if (!emailValid) {
+              document.getElementById("emailError").innerHTML =
+                "Enter a valid mail id";
+            } else {
+              document.getElementById("emailError").innerHTML = "";
+            }
+            if (!dayPlanValid) {
+              document.getElementById("dayPlanError").innerHTML =
+                "Select a day plan";
+            } else {
+              document.getElementById("dayPlanError").innerHTML = "";
+            }
+            if (!destinationValid) {
+              document.getElementById("destinationError").innerHTML =
+                "Select a destination";
+            } else {
+              document.getElementById("destinationError").innerHTML = "";
+            }
+            if (!dateValid) {
+              document.getElementById("dateError").innerHTML =
+                "Selecta a valid date";
+            } else {
+              document.getElementById("dateError").innerHTML = "";
+            }
+
+            if (
+              nameValid &&
+              numberValid &&
+              emailValid &&
+              dayPlanValid &&
+              destinationValid &&
+              dateValid
+            ) {
+              //Store this value into an object
+              const updatedData = {
+                id: mId,
+                name: name,
+                number: number,
+                email: email,
+                destination: destination,
+                dayPlan: dayPlan,
+                date: date,
+              };
+
+              fetch(`/modifyuser/${mId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedData),
+              }).then((response) => {
+                if (response.status === 200) {
+                  console.log("Data modified succcesfully");
+                  alert("Data modified successfully");
+                  window.location.href = "/bookingstable";
+                } else {
+                  console.error(
+                    "Unexpected error occured while modifying data",
+                    response.status,
+                    response.statusText
+                  );
+                }
+              });
+            }
+          });
+      }
+    </script>
   </body>
 </html>

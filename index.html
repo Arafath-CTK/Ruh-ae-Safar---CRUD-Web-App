@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ruh Ae Safar || Your Travel Partner</title>
+    <title>Ruh Ae Safar | Your Travel Partner</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -71,10 +71,10 @@
       >
         Ruh' ae___Safar.
       </h1>
-      <!-- <input
+      <input
         id="bHistory"
         type="button"
-        value="Booking  History"
+        value="Booking History"
         style="
           color: maroon;
           width: 9rem;
@@ -82,8 +82,8 @@
           margin-right: 40px;
           border: 0;
         "
-        onclick="(() =>  window.location.href = '/tableView')()"
-      /> -->
+        onclick="(() =>  window.location.href = '/bookingstable')()"
+      />
     </nav>
 
     <div
@@ -216,7 +216,7 @@
           let date = document.getElementById("date").value;
           let id = 0;
 
-          let nameValid = /^[A-Za-z]{3,}$/.test(name);
+          let nameValid = /^[A-Za-z\s]{3,}$/.test(name);
           let numberValid = /^\d{10,}$/.test(number);
           let emailValid = /^[\w-.]+@[\w-]+\.+[\w-]{2,}$/.test(email);
           let dayPlanValid = dayPlan !== "" || dayPlan === "Select Days";
@@ -298,7 +298,7 @@
                 );
               }
             });
-            window.location.href = "/userList"; //And at last we display the user entered data along with the previous datas as a table.
+            window.location.href = "/bookingstable"; //And at last we display the user entered data along with the previous datas as a table.
           }
         });
       });
