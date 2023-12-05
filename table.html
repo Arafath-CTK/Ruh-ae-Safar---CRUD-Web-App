@@ -275,8 +275,15 @@
           "
         >
           <input
+            id="cancel"
+            type="submit"
+            value="Cancel"
+            style="background-color: maroon; color: white; width: 15rem"
+          />
+
+          <input
             id="submitChange"
-            type="button"
+            type="submit"
             value="Modify"
             style="background-color: maroon; color: white; width: 15rem"
           />
@@ -307,7 +314,6 @@
               <td>${element.date}</td>
               <td style=" align-items: center; justify-content: space-around;">
                   <button
-                      type="button"
                       style="
                         padding:4px;
                         background-color:rgb(234, 195, 195);
@@ -316,7 +322,7 @@
                         height: 30px;
                         border-radius:5px;
                         border:0"
-                      onclick="modifyUser(${element.id},${element.name},${element.number},${element.email},${element.destination},${element.dayPlan},${element.date})"
+                      onclick= "modifyUser (${element.id},'${element.name}','${element.number}','${element.email}','${element.destination}','${element.dayPlan}','${element.date}')"
                   >Modify</button>
                   <button
                       style="
@@ -329,6 +335,7 @@
                         height: 30px;
                         border-radius: 5px;
                         border:0"
+                      onclick = "deleteUser ('${element.id}')"
                   >Delete</button>
               </td>
               `;
@@ -361,99 +368,116 @@
         document.getElementById("dayPlan").value = mDayPlan;
         document.getElementById("date").value = mDate;
 
-        document
-          .getElementById("submitChange")
-          .addEventListener("click", () => {
-            let name = document.getElementById("name").value.toUpperCase();
-            let number = document.getElementById("number").value;
-            let email = document.getElementById("email").value;
-            let dayPlan = document.getElementById("dayPlan").value;
-            let destination = document.getElementById("destination").value;
-            let date = document.getElementById("date").value;
+        const modifyBtn = document.getElementById("submitChange");
+        modifyBtn.addEventListener("click", () => {
+          let name = document.getElementById("name").value.toUpperCase();
+          let number = document.getElementById("number").value;
+          let email = document.getElementById("email").value;
+          let dayPlan = document.getElementById("dayPlan").value;
+          let destination = document.getElementById("destination").value;
+          let date = document.getElementById("date").value;
 
-            let nameValid = /^[A-Za-z\s]{3,}$/.test(name);
-            let numberValid = /^\d{10,}$/.test(number);
-            let emailValid = /^[\w-.]+@[\w-]+\.+[\w-]{2,}$/.test(email);
-            let dayPlanValid = dayPlan !== "" || dayPlan === "Select Days";
-            let destinationValid =
-              destination !== "" || destination === "Select Destination";
-            let dateValid = /^\d{4}-\d{2}-\d{2}$/.test(date);
+          let nameValid = /^[A-Za-z\s]{3,}$/.test(name);
+          let numberValid = /^\d{10}$/.test(number);
+          let emailValid = /^[\w-.]+@[\w-]+\.+[\w-]{2,}$/.test(email);
+          let dayPlanValid = dayPlan !== "" || dayPlan === "Select Days";
+          let destinationValid =
+            destination !== "" || destination === "Select Destination";
+          let dateValid = /^\d{4}-\d{2}-\d{2}$/.test(date);
 
-            if (!nameValid) {
-              document.getElementById("nameError").innerHTML =
-                "Min 3 character needed";
-            } else {
-              document.getElementById("nameError").innerHTML = "";
-            }
-            if (!numberValid) {
-              document.getElementById("numberError").innerHTML =
-                "Enter a valid phone number";
-            } else {
-              document.getElementById("numberError").innerHTML = "";
-            }
-            if (!emailValid) {
-              document.getElementById("emailError").innerHTML =
-                "Enter a valid mail id";
-            } else {
-              document.getElementById("emailError").innerHTML = "";
-            }
-            if (!dayPlanValid) {
-              document.getElementById("dayPlanError").innerHTML =
-                "Select a day plan";
-            } else {
-              document.getElementById("dayPlanError").innerHTML = "";
-            }
-            if (!destinationValid) {
-              document.getElementById("destinationError").innerHTML =
-                "Select a destination";
-            } else {
-              document.getElementById("destinationError").innerHTML = "";
-            }
-            if (!dateValid) {
-              document.getElementById("dateError").innerHTML =
-                "Selecta a valid date";
-            } else {
-              document.getElementById("dateError").innerHTML = "";
-            }
+          if (!nameValid) {
+            document.getElementById("nameError").innerHTML =
+              "Min 3 character needed";
+          } else {
+            document.getElementById("nameError").innerHTML = "";
+          }
+          if (!numberValid) {
+            document.getElementById("numberError").innerHTML =
+              "Enter a valid phone number";
+          } else {
+            document.getElementById("numberError").innerHTML = "";
+          }
+          if (!emailValid) {
+            document.getElementById("emailError").innerHTML =
+              "Enter a valid mail id";
+          } else {
+            document.getElementById("emailError").innerHTML = "";
+          }
+          if (!dayPlanValid) {
+            document.getElementById("dayPlanError").innerHTML =
+              "Select a day plan";
+          } else {
+            document.getElementById("dayPlanError").innerHTML = "";
+          }
+          if (!destinationValid) {
+            document.getElementById("destinationError").innerHTML =
+              "Select a destination";
+          } else {
+            document.getElementById("destinationError").innerHTML = "";
+          }
+          if (!dateValid) {
+            document.getElementById("dateError").innerHTML =
+              "Selecta a valid date";
+          } else {
+            document.getElementById("dateError").innerHTML = "";
+          }
 
-            if (
-              nameValid &&
-              numberValid &&
-              emailValid &&
-              dayPlanValid &&
-              destinationValid &&
-              dateValid
-            ) {
-              //Store this value into an object
-              const updatedData = {
-                id: mId,
-                name: name,
-                number: number,
-                email: email,
-                destination: destination,
-                dayPlan: dayPlan,
-                date: date,
-              };
+          if (
+            nameValid &&
+            numberValid &&
+            emailValid &&
+            dayPlanValid &&
+            destinationValid &&
+            dateValid
+          ) {
+            //Store this value into an object
+            const updatedData = {
+              id: mId,
+              name: name,
+              number: number,
+              email: email,
+              destination: destination,
+              dayPlan: dayPlan,
+              date: date,
+            };
 
-              fetch(`/modifyuser/${mId}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updatedData),
-              }).then((response) => {
-                if (response.status === 200) {
-                  console.log("Data modified succcesfully");
-                  alert("Data modified successfully");
-                  window.location.href = "/bookingstable";
-                } else {
-                  console.error(
-                    "Unexpected error occured while modifying data",
-                    response.status,
-                    response.statusText
-                  );
-                }
-              });
-            }
-          });
+            fetch(`/modifyuser/${mId}`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(updatedData),
+            }).then((response) => {
+              if (response.status === 200) {
+                console.log("Data modified succcesfully");
+                alert("Data modified successfully");
+                window.location.href = "/bookingstable";
+              } else {
+                console.error(
+                  "Unexpected error occured while modifying data",
+                  response.status,
+                  response.statusText
+                );
+              }
+            });
+          }
+        });
+        const cancelBtn = document.getElementById("cancel");
+        cancelBtn.addEventListener("click", () => {
+          window.location.href = "/bookingstable";
+        });
+      }
+
+      //User deletion Part
+      function deleteUser(userId) {
+        fetch(`/deleteUser/${userId}`, {
+          method: "DELETE",
+        }).then((response) => {
+          if (response.status === 200) {
+            alert("Booking deleted successfully");
+            window.location.href = "/bookingstable";
+          } else {
+            console.error("Unexpected error occured");
+          }
+        });
       }
     </script>
   </body>

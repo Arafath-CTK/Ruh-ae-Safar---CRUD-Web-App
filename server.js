@@ -1,6 +1,8 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
+const { parse } = require("path");
+const { error } = require("console");
 
 const server = http.createServer((req, res) => {
   let route = req.url;
@@ -111,10 +113,10 @@ const server = http.createServer((req, res) => {
       }
     });
   } else if (
-    method === "PUT" &&
-    route.toLocaleLowerCase().startsWith === `/modifyuser`
+    method === "PUT" && //the editing method is "PUT"
+    route.toLocaleLowerCase().startsWith(`/modifyuser`)
   ) {
-    const parsedUrl = url.parse(route, true); //parsed url and by specifying "true", it will return an object. easy for further operations.
+    const parsedUrl = url.parse(route, true);
     const userId = parseInt(parsedUrl.pathname.split("/").pop());
 
     let body = "";
@@ -126,30 +128,30 @@ const server = http.createServer((req, res) => {
       try {
         const updatedData = JSON.parse(body);
 
-        fs.readFile("data.json", "utf-8", (err, existingData) => {
+        fs.readFile("data.json", "utf-8", (err, jsonData) => {
           if (err) {
-            console.error("Error processing data", err);
+            console.error("Error reading data", err);
             res.writeHead(500, { "Content-Type": "text/plain" });
-            res.end("Unexpected error occured while processing data");
+            res.end("Unexpected error occurred while reading data");
           } else {
-            let existingDatas = JSON.parse(existingData);
+            let existingData = JSON.parse(jsonData);
 
-            for (let i = 0; i < existingDatas.length; i++) {
-              if (existingDatas[i].id === userId) {
-                existingDatas[i] = updatedData;
+            for (let i = 0; i < existingData.length; i++) {
+              if (existingData[i].id === userId) {
+                existingData[i] = updatedData;
                 break;
               }
             }
 
             fs.writeFile(
               "data.json",
-              JSON.stringify(existingDatas, null, 2),
+              JSON.stringify(existingData, null, 2),
               (err) => {
                 if (err) {
-                  console.error("Error processing data", err);
+                  console.error("Error writing data", err);
                   res.writeHead(500, { "Content-Type": "text/plain" });
                   res.end(
-                    "Unexpected error occured while updating the database"
+                    "Unexpected error occurred while updating the database"
                   );
                 } else {
                   console.log("Data updated to the database");
@@ -163,7 +165,34 @@ const server = http.createServer((req, res) => {
       } catch (error) {
         console.error("Error processing data", error);
         res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Unexpected error occured while processing data");
+        res.end("Unexpected error occurred while processing data");
+      }
+    });
+  } else if (
+    method === "DELETE" &&
+    route.toLocaleLowerCase().startsWith("/deleteuser")
+  ) {
+    const parsedUrl = url.parse(route, true); //returns url as object
+    const userId = parseInt(parsedUrl.pathname.split("/").pop());
+
+    const jsonData = require("./data.json"); //
+    const updatedData = jsonData.filter((otherUser) => otherUser.id !== userId);
+
+    for (let i = 0; i < updatedData.length; i++) {
+      updatedData[i].id = i + 1;
+    }
+
+    const updatedDataJson = JSON.stringify(updatedData, null, 2);
+
+    fs.writeFile("data.json", updatedDataJson, (err) => {
+      if (err) {
+        console.error("Error updating data after deletion", err);
+        res.writeHead(500, { "Content-Type": "text/plain" });
+        res.end("Unexpexted error occured while updating the database");
+      } else {
+        console.log("Data updated successfully after deletion");
+        res.writeHead(200, { "Content-Type": "text/plain" });
+        res.end("Database updated succesfully");
       }
     });
   } else {

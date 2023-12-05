@@ -217,7 +217,7 @@
           let id = 0;
 
           let nameValid = /^[A-Za-z\s]{3,}$/.test(name);
-          let numberValid = /^\d{10,}$/.test(number);
+          let numberValid = /^\d{10}$/.test(number);
           let emailValid = /^[\w-.]+@[\w-]+\.+[\w-]{2,}$/.test(email);
           let dayPlanValid = dayPlan !== "" || dayPlan === "Select Days";
           let destinationValid =
